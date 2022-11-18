@@ -89,7 +89,7 @@ define_function(network_dns_lookup)
 
   json_array_foreach(dns_info_json, index, value)
   {
-    if (json_unpack(value, "{s:s, s:s}", "ip", &ip, field_name, &hostname) == 0)
+    json_array_foreach(dns_info_json, index, value)if (json_unpack(value, "{s:s, s:s}", "ip", &ip, field_name, &hostname) == 0)
     {
       if (yr_re_match(context, regexp_argument(1), hostname) > 0)
       {

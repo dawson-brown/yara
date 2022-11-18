@@ -36,17 +36,13 @@ SUFFIXES = .proto .pb-c.c .pb-c.h .c
 endif
 
 MODULES =  modules/tests/tests.c
-
 MODULES += modules/elf/elf.c
-
 MODULES += modules/math/math.c
-
 MODULES += modules/time/time.c
-
 MODULES += modules/pe/pe.c
 MODULES += modules/pe/pe_utils.c
-
 MODULES += modules/console/console.c
+MODULES += modules/har/har.c
 
 if CUCKOO_MODULE
 MODULES += modules/cuckoo/cuckoo.c
