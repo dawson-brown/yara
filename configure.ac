@@ -148,6 +148,18 @@ AC_ARG_ENABLE([cuckoo],
     PC_REQUIRES_PRIVATE="$PC_REQUIRES_PRIVATE jansson"
   fi])
 
+AC_ARG_ENABLE([har],
+  [AS_HELP_STRING([--enable-har], [enable har module])],
+  [if test x$enableval = xyes; then
+    build_har_module=true
+    AC_CHECK_HEADERS([jansson.h],,
+      AC_MSG_ERROR([please install Jansson library]))
+    AC_CHECK_LIB(jansson, json_loadb,,
+      AC_MSG_ERROR([please install Jansson library]))
+    CFLAGS="$CFLAGS -DHAR_MODULE"
+    PC_REQUIRES_PRIVATE="$PC_REQUIRES_PRIVATE jansson"
+  fi])
+
 AC_ARG_ENABLE([magic],
   [AS_HELP_STRING([--enable-magic], [enable magic module])],
   [if test x$enableval = xyes; then
@@ -350,6 +362,7 @@ AM_CONDITIONAL([OPTIMIZATION], [test x$optimization = xtrue])
 AM_CONDITIONAL([ADDRESS_SANITIZER], [test x$address_sanitizer = xtrue])
 AM_CONDITIONAL([UB_SANITIZER], [test x$undefined_behaviour_sanitizer = xtrue])
 AM_CONDITIONAL([CUCKOO_MODULE], [test x$build_cuckoo_module = xtrue])
+AM_CONDITIONAL([HAR_MODULE], [test x$build_har_module = xtrue])
 AM_CONDITIONAL([MAGIC_MODULE], [test x$build_magic_module = xtrue])
 AM_CONDITIONAL([HASH_MODULE], [test x$build_hash_module = xtrue])
 AM_CONDITIONAL([AUTHENTICODE_MODULE], [test x$build_authenticode_module = xtrue])
